@@ -1,3 +1,8 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'edge_case/css/style.css' %}" />
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+
 <p>{{profile.name}}</p>
 <img src= {{profile.img.url}} alt ="No Picture">
 <p>{{profile.quote}}</p>

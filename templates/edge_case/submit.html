@@ -1,3 +1,9 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'edge_case/css/style.css' %}" />
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+
+<body>
 <h1>Submit New Edge Case</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -9,3 +15,4 @@
     
 <input type="submit" value="Submit" />
 </form>
+</body>

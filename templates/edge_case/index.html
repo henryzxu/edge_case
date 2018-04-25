@@ -1,25 +1,69 @@
 {% load staticfiles %}
-
+<script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{% static 'edge_case/css/style.css' %}" />
-<script src = "{% static 'edge_case/js/jquery-3.3.1.min.js' %}"></script>
-<script src = "{% static 'edge_case/js/masonry.pkgd.min.js' %}"></script>
-<script src = "{% static 'edge_case/js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+<!-- <script src = "{% static 'edge_case/js/jquery-3.3.1.min.js' %}"></script> -->
+<!-- <script src = "{% static 'edge_case/js/masonry.pkgd.min.js' %}"></script> -->
+<!-- <script src = "{% static 'edge_case/js/imagesloaded.pkgd.min.js' %}"></script> -->
 
 
-<script src = "{% static 'edge_case/js/script.js' %}">
+<script src="{% static 'edge_case/js/script.js' %}">
 </script>
 
-{% if edge_case_profiles %}
-    <ul class = "wall" >
-    {% for p in edge_case_profiles %}
-    <li class = "brick">
-        <div class="thumbnail">
-            <a href="{% url 'edge_case:expand_profile' p.id %}"><img src= {{p.img.url}} alt ="No Picture"></a>
-        </div>
-    </li>
+<body>
+    <div class="container">
+    <h1 class="title">edge case</h1>
+    {% if edge_case_profiles %}
     
+        <div class="wall">
+            {% for p in edge_case_profiles %}
+            <div class="brick">
+                <div class="thumbnail">
+                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> -->
+                    <a data-toggle="modal" data-target="#{{ p.id }}Modal">
+                        <img src={{p.img.url}} alt="No Picture" class="profile_image">
+                    </a>
+                    <!-- </button> -->
+                    <span class="thumbnail_name">
+                        {{p.name}}
+                    </span>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% for p in edge_case_profiles %}
+    <div class="modal fade" id="{{ p.id }}Modal" tabindex="-1" role="dialog" aria-labelledby="{{ p.id }}Modal" aria-hidden="true">
+        <div class="md-content">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="{{ p.id }}Modal">{{p.name}}</h5>
+                    </div>
+                    <div class="modal-body">
+                        <img src={{p.img.url}} alt="No Picture" class="profile_image_md">
+                    </br>
+                        <span class="modal-text"> "{{p.quote}}"</span>
+                    </div>
+                    <!-- <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-    </ul>
-{% else %}
+    {% else %}
     <p>No profiles are available.</p>
-{% endif %}
+    {% endif %}
+
+</body>
